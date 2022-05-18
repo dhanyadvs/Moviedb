@@ -1,0 +1,22 @@
+import sqlite3 as sql
+connection = sql.connect("Moviedatabase.db")
+pointer = connection.cursor()
+pointer.execute("CREATE TABLE IF NOT EXISTS MOVIE(MOV_NAME TEXT, ACTOR TEXT, ACTRESS TEXT, DIR_NAME TEXT, YEAR INTEGER)")
+pointer.execute("INSERT INTO MOVIE VALUES('KGF','YASH','SRINIDHI','PRASHANTH',2022)")
+pointer.execute("INSERT INTO MOVIE VALUES('BEAST','VIJAY','POOJA','NELSON',2022)")
+pointer.execute("INSERT INTO MOVIE VALUES('HAMILTON','LIN','ARIANA','THOMAS',2020)")
+pointer.execute("INSERT INTO MOVIE VALUES('SPIDER-MAN','TOM HOLLAND','ZENDAYA','JON WATTS',2017)")
+pointer.execute("INSERT INTO MOVIE VALUES('PARASITE','CHOI WOO','YEO-JEONG','BONG JOON',2019)")
+pointer.execute("INSERT INTO MOVIE VALUES('PUSHPA','ALLU ARJUN','RASHMIKA','SUKUMAR',2021)")
+print("***************************All Details***************************************")
+allMovie = pointer.execute("SELECT * FROM MOVIE").fetchall()
+for i in allMovie:
+    title,actor,actress,director,releasedYear = i
+print("{t}\t\t{a}\t\t{ats}\t\t{d}\t\t{ry}".format(t=title,a=actor, ats=actress,d=director,ry=releasedYear))
+print("==============================================================================")
+print("***************Actor Query****************")
+actorQuery = pointer.execute("SELECT * FROM MOVIE WHERE ACTOR = 'YASH'").fetchall()
+for i in actorQuery:
+    title,actor,actress,director,releasedYear = i
+print("{t}\t\t{a}\t\t{ats}\t\t{d}\t\t{ry}".format(t=title,a=actor,ats=actress,d=director,ry=releasedYear))
+print("==============================================================================")
